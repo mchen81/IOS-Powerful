@@ -2,14 +2,17 @@ PODS:
   - ChameleonFramework/Default (2.1.0)
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
+  - IQKeyboardManagerSwift (6.5.5)
   - SwipeCellKit (2.7.1)
 
 DEPENDENCIES:
   - ChameleonFramework/Swift (from `https://github.com/wowansm/Chameleon.git`, branch `swift5`)
+  - IQKeyboardManagerSwift
   - SwipeCellKit
 
 SPEC REPOS:
   trunk:
+    - IQKeyboardManagerSwift
     - SwipeCellKit
 
 EXTERNAL SOURCES:
@@ -24,8 +27,9 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
+  IQKeyboardManagerSwift: 0fb93310284665245591f50f7a5e38de615960b7
   SwipeCellKit: 3972254a826da74609926daf59b08d6c72e619ea
 
-PODFILE CHECKSUM: d7a3325a5439f3475303740a9725722d2c6b91fc
+PODFILE CHECKSUM: ff7a2ad545ac5bea37d8465941979b3346198c5a
 
 COCOAPODS: 1.9.2
