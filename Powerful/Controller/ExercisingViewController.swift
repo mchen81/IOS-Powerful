@@ -7,9 +7,9 @@
 //
 
 import UIKit
+import SwipeCellKit
 
 class ExercisingViewController: UIViewController {
-    
     
     var exercises: [Exercise]!
     
@@ -25,8 +25,7 @@ class ExercisingViewController: UIViewController {
     }
     
     @IBAction func addExerciseButtonPressed(_ sender: UIButton) {
-        // alert 
-        
+        // alert
         var textField = UITextField()
         let alert = UIAlertController(title: "Add New Exercise", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "Add", style: .default) { (action) in
@@ -46,7 +45,22 @@ class ExercisingViewController: UIViewController {
         
         present(alert, animated: true, completion: nil)
     }
+    
+    @objc func addSetButtonPressed(sender: UIButton!){
+        
+        exercisingManager.addSingleSet(targetExerciseIndex: sender.tag)
+        updateUI()
+    }
+    
+    func updateUI(reloadTV: Bool = true){
+        exercises = exercisingManager.exercises
+        if(reloadTV){
+            exercisingTableView.reloadData()
+        }
+    }
+    
 }
+
 
 extension ExercisingViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -57,6 +71,18 @@ extension ExercisingViewController: UITableViewDelegate, UITableViewDataSource {
         return exercises[section].name
     }
     
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        // let footerView = UIView()
+        
+        let addSetButton = UIButton(type: .contactAdd)
+        addSetButton.tag = section
+        addSetButton.addTarget(self,
+                               action: #selector(addSetButtonPressed),
+                               for: .touchUpInside)
+        
+        return addSetButton
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let sets = exercises[section].sets?.allObjects as? [SingleSet] {
             return sets.count
@@ -65,18 +91,46 @@ extension ExercisingViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: K.CellIdentifier.ExerciseSetCell)
-        cell?.textLabel?.text = "Cannot find any elements"
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.CellIdentifier.ExerciseSetCell) as! SingleSetTVCell
+        cell.delegate = self
+        cell.repsTextField.delegate = self
+        cell.weightTextField.delegate = self
+        
         if let sets = exercises[indexPath.section].sets?.allObjects as? [SingleSet] {
-            cell?.textLabel?.text = sets[indexPath.row].previous
+            cell.textLabel?.text = sets[indexPath.row].previous
         }
-        return cell!
+        return cell
     }
-    
-    func updateUI(){
-        exercises = exercisingManager.exercises
-        exercisingTableView.reloadData()
-    }
-    
+
 }
 
+
+//MARK: - SwipeTableViewCellDelegate
+extension ExercisingViewController: SwipeTableViewCellDelegate{
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .right else { return nil }
+
+        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+            // handle action by updating model with deletion
+            self.exercisingManager.deleteSingleSet(targetExerciseIndex: indexPath.section, targetSetIndex: indexPath.row)
+            self.updateUI(reloadTV: false)
+        }
+
+        // customize the action appearance
+        deleteAction.image = UIImage(named: "delete-icon")
+
+        return [deleteAction]
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
+        var options = SwipeOptions()
+        options.expansionStyle = .destructive
+        return options
+    }
+}
+
+
+//MARK: - text field
+extension ExercisingViewController: UITextFieldDelegate{
+    
+}

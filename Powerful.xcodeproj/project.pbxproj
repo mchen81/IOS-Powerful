@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		561068C72489C23100F48B1C /* ExercisingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561068C62489C23100F48B1C /* ExercisingManager.swift */; };
+		561068CB248AAE7A00F48B1C /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 561068CA248AAE7A00F48B1C /* delete.png */; };
+		561068CE248AC93A00F48B1C /* SingleSetTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561068CD248AC93A00F48B1C /* SingleSetTVCell.swift */; };
 		56A586302489AC3A005E0E5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A5862F2489AC3A005E0E5B /* AppDelegate.swift */; };
 		56A586322489AC3A005E0E5B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A586312489AC3A005E0E5B /* SceneDelegate.swift */; };
 		56A586372489AC3A005E0E5B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56A586352489AC3A005E0E5B /* Main.storyboard */; };
@@ -24,6 +26,8 @@
 /* Begin PBXFileReference section */
 		50FC23F21716B6130854675A /* Pods-Powerful.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Powerful.release.xcconfig"; path = "Target Support Files/Pods-Powerful/Pods-Powerful.release.xcconfig"; sourceTree = "<group>"; };
 		561068C62489C23100F48B1C /* ExercisingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisingManager.swift; sourceTree = "<group>"; };
+		561068CA248AAE7A00F48B1C /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
+		561068CD248AC93A00F48B1C /* SingleSetTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSetTVCell.swift; sourceTree = "<group>"; };
 		56A5862C2489AC3A005E0E5B /* Powerful.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Powerful.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56A5862F2489AC3A005E0E5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56A586312489AC3A005E0E5B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -52,6 +56,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		561068CC248AC5A200F48B1C /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				56A586522489B5B2005E0E5B /* RoutineManager.swift */,
+				561068C62489C23100F48B1C /* ExercisingManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		56A586232489AC3A005E0E5B = {
 			isa = PBXGroup;
 			children = (
@@ -78,6 +91,7 @@
 				56A586492489ACB7005E0E5B /* DataModel */,
 				56A586472489AC8B005E0E5B /* View */,
 				56A5863B2489AC3B005E0E5B /* Assets.xcassets */,
+				561068CA248AAE7A00F48B1C /* delete.png */,
 				56A586402489AC3B005E0E5B /* Info.plist */,
 			);
 			path = Powerful;
@@ -106,6 +120,7 @@
 			children = (
 				56A5864C2489AF75005E0E5B /* ExercisingViewController.swift */,
 				56A5864E2489B2F4005E0E5B /* RoutineViewController.swift */,
+				561068CD248AC93A00F48B1C /* SingleSetTVCell.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -115,8 +130,7 @@
 			children = (
 				56A586382489AC3A005E0E5B /* Powerful.xcdatamodeld */,
 				56A586502489B3D4005E0E5B /* Constants.swift */,
-				56A586522489B5B2005E0E5B /* RoutineManager.swift */,
-				561068C62489C23100F48B1C /* ExercisingManager.swift */,
+				561068CC248AC5A200F48B1C /* Managers */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -198,6 +212,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				561068CB248AAE7A00F48B1C /* delete.png in Resources */,
 				56A5863F2489AC3B005E0E5B /* LaunchScreen.storyboard in Resources */,
 				56A5863C2489AC3B005E0E5B /* Assets.xcassets in Resources */,
 				56A586372489AC3A005E0E5B /* Main.storyboard in Resources */,
@@ -258,6 +273,7 @@
 				56A586302489AC3A005E0E5B /* AppDelegate.swift in Sources */,
 				56A586322489AC3A005E0E5B /* SceneDelegate.swift in Sources */,
 				56A5864D2489AF75005E0E5B /* ExercisingViewController.swift in Sources */,
+				561068CE248AC93A00F48B1C /* SingleSetTVCell.swift in Sources */,
 				56A5864F2489B2F4005E0E5B /* RoutineViewController.swift in Sources */,
 				561068C72489C23100F48B1C /* ExercisingManager.swift in Sources */,
 				56A586512489B3D4005E0E5B /* Constants.swift in Sources */,

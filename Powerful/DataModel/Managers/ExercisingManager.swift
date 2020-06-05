@@ -30,6 +30,31 @@ class ExercisingManager{
         saveExercise()
     }
     
+    func deleteExercise(targetIndex: Int){
+        coreDataContext.delete(exercises[targetIndex])
+        exercises.remove(at: targetIndex)
+        saveExercise()
+    }
+    
+    func deleteSingleSet(targetExerciseIndex: Int, targetSetIndex: Int){
+        var sets = exercises[targetExerciseIndex].sets?.allObjects as! [SingleSet]
+        sets.remove(at: targetSetIndex)
+        exercises[targetExerciseIndex].sets = NSSet(array: sets)
+        saveExercise()
+    }
+    
+    func addSingleSet(targetExerciseIndex: Int){
+        var sets = exercises[targetExerciseIndex].sets?.allObjects as! [SingleSet]
+        let lastSet = sets.last
+        let newSet = SingleSet(context: coreDataContext)
+        newSet.previous = lastSet?.previous ?? "no previous"
+        newSet.weight = lastSet?.weight ?? 0
+        newSet.reps = lastSet?.reps ?? 0
+        sets.append(newSet)
+        exercises[targetExerciseIndex].sets = NSSet(array: sets)
+        saveExercise()
+    }
+    
     func saveExercise() {
         do {
             try coreDataContext.save()

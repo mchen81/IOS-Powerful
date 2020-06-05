@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SwipeCellKit
 
-class RoutineViewController: UIViewController {
+class RoutineViewController: UIViewController{
     
     @IBOutlet weak var routineTableView: UITableView!
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -22,6 +23,8 @@ class RoutineViewController: UIViewController {
         
         routineTableView.delegate = self
         routineTableView.dataSource = self
+        
+        routineTableView.rowHeight = 80.0
         
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
     }
@@ -72,43 +75,44 @@ extension RoutineViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: K.CellIdentifier.RoutineCell)
-        cell?.textLabel?.text = routines[indexPath.row].name
-        return cell!
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.CellIdentifier.RoutineCell) as! SwipeTableViewCell
+        cell.delegate = self
+        cell.textLabel?.text = routines[indexPath.row].name
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: K.SeugueIdentifier.StartWorkingOut, sender: self)
     }
     
-    func updateUI(){
+    func updateUI(reloadTV: Bool = true){
         routines = routineManager.routines
-        routineTableView.reloadData()
+        if reloadTV {
+            routineTableView.reloadData()
+        }
     }
 }
 
-// alert
-// var textField = UITextField()
-//
-// let alert = UIAlertController(title: "Add New Category", message: "", preferredStyle: .alert)
-//
-// let action = UIAlertAction(title: "Add", style: .default) { (action) in
-//
-//     let newCategory = Category(context: self.context)
-//     newCategory.name = textField.text!
-//
-//     self.categories.append(newCategory)
-//
-//     self.saveCategories()
-//
-// }
-//
-// alert.addAction(action)
-//
-// alert.addTextField { (field) in
-//     textField = field
-//     textField.placeholder = "Add a new category"
-// }
-//
-// present(alert, animated: true, completion: nil)
 
+extension RoutineViewController: SwipeTableViewCellDelegate{
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .right else { return nil }
+
+        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+            // handle action by updating model with deletion
+            self.routineManager.deleteRoutine(with: indexPath.row)
+            self.updateUI(reloadTV: false)
+        }
+
+        // customize the action appearance
+        deleteAction.image = UIImage(named: "delete-icon")
+
+        return [deleteAction]
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
+        var options = SwipeOptions()
+        options.expansionStyle = .destructive
+        return options
+    }
+}
