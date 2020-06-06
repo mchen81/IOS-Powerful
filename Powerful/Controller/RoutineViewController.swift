@@ -8,17 +8,21 @@
 
 import UIKit
 import SwipeCellKit
+import RealmSwift
 
 class RoutineViewController: UIViewController{
     
     @IBOutlet weak var routineTableView: UITableView!
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    
     var routineManager: RoutineManager!
-    var routines: [Routine]!
+    var routines: Results<Routine>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        routineManager = RoutineManager(context: context)
+        routineManager = RoutineManager()
+        routineManager.loadRoutine()
+        
         routines = routineManager.routines
         
         routineTableView.delegate = self
@@ -26,7 +30,8 @@ class RoutineViewController: UIViewController{
         
         routineTableView.rowHeight = 80.0
         
-        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+        // let dd = NSSortDescriptor(
+        // print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
     }
     
     @IBAction func addRoutinePressed(_ sender: UIButton) {
@@ -37,10 +42,7 @@ class RoutineViewController: UIViewController{
         let action = UIAlertAction(title: "Add", style: .default) { (action) in
             if let text = textField.text{
                 if(!text.isEmpty){
-                    let newRoutine = Routine(context: self.context)
-                    newRoutine.name = textField.text!
-                    newRoutine.exercises = []
-                    self.routineManager.addRoutine(with: newRoutine)
+                    self.routineManager.addRoutine(name: text)
                     self.updateUI()
                 }
             }
@@ -62,9 +64,11 @@ class RoutineViewController: UIViewController{
         let destinationVC = segue.destination as! ExercisingViewController
         
         if let indexPath = routineTableView.indexPathForSelectedRow {
-            let thisRutine = routineManager.routines[indexPath.row]
-            let exerciseManager = ExercisingManager(thisRutine, context)
-            destinationVC.exercisingManager = exerciseManager
+            if let thisRutine = routineManager.routines?[indexPath.row]{
+                let exerciseManager = ExercisingManager()
+                exerciseManager.parentRutine = thisRutine
+                destinationVC.exercisingManager = exerciseManager
+            }
         }
     }
 }
@@ -97,16 +101,16 @@ extension RoutineViewController: UITableViewDataSource, UITableViewDelegate {
 extension RoutineViewController: SwipeTableViewCellDelegate{
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         guard orientation == .right else { return nil }
-
+        
         let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
             // handle action by updating model with deletion
-            self.routineManager.deleteRoutine(with: indexPath.row)
+            self.routineManager.deleteRoutine(targetIndex: indexPath.row)
             self.updateUI(reloadTV: false)
         }
-
+        
         // customize the action appearance
         deleteAction.image = UIImage(named: "delete-icon")
-
+        
         return [deleteAction]
     }
     

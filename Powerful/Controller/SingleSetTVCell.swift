@@ -19,6 +19,7 @@ class SingleSetTVCell: SwipeTableViewCell{
     
     override class func awakeFromNib() {
         super.awakeFromNib()
+        
         // weightTextField.delegate = self
         // repsTextField.delegate = self
         

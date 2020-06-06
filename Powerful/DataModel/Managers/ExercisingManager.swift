@@ -1,74 +1,99 @@
 
 import Foundation
-import CoreData
+import RealmSwift
 
 class ExercisingManager{
-    var parentRutine: Routine
-    var exercises: [Exercise]
-    var coreDataContext: NSManagedObjectContext
     
-    init(_ parent: Routine, _ context: NSManagedObjectContext) {
-        self.coreDataContext = context
-        self.parentRutine = parent
-        exercises = parent.exercises?.allObjects as! [Exercise]
+    let realm = try! Realm()
+    var exercises: Results<Exercise>!
+    
+    var parentRutine: Routine? {
+        didSet {
+            loadExercise()
+        }
     }
-    
+
     func addExercise(name: String, part: String){
-        let newExercise = Exercise(context: coreDataContext)
+        
+        let newExercise = Exercise()
         newExercise.name = name
-        newExercise.bodypart = part
-        newExercise.parentRoutine = parentRutine
+        newExercise.bodyPart = part
+        newExercise.order = parentRutine?.exercises.count ?? 0
         
-        let set = SingleSet(context: coreDataContext)
-        set.previous = "0.0 * 0.0"
-        set.parentExercise = newExercise
-        set.reps = 0
-        set.weight = 0
-        set.done = false
+        let defaultSet = SingleSet()
+        defaultSet.order = 0
+        defaultSet.previous = ""
         
-        exercises.append(newExercise)
-        saveExercise()
+        newExercise.sets.append(defaultSet)
+        
+        do{
+            try realm.write {
+                parentRutine?.exercises.append(newExercise)
+                // realm.add(newExercise)
+            }
+        }catch{
+            print("Faild to add exercise")
+        }
+        
     }
     
     func deleteExercise(targetIndex: Int){
-        coreDataContext.delete(exercises[targetIndex])
-        exercises.remove(at: targetIndex)
-        saveExercise()
-    }
-    
-    func deleteSingleSet(targetExerciseIndex: Int, targetSetIndex: Int){
-        var sets = exercises[targetExerciseIndex].sets?.allObjects as! [SingleSet]
-        sets.remove(at: targetSetIndex)
-        exercises[targetExerciseIndex].sets = NSSet(array: sets)
-        saveExercise()
+        let target = exercises![targetIndex]
+        
+        do{
+            try realm.write{
+                realm.delete(target)
+            }
+        }catch{
+            print("Fail to delete an exercise")
+        }
+        
     }
     
     func addSingleSet(targetExerciseIndex: Int){
-        var sets = exercises[targetExerciseIndex].sets?.allObjects as! [SingleSet]
-        let lastSet = sets.last
-        let newSet = SingleSet(context: coreDataContext)
-        newSet.previous = lastSet?.previous ?? "no previous"
-        newSet.weight = lastSet?.weight ?? 0
-        newSet.reps = lastSet?.reps ?? 0
-        sets.append(newSet)
-        exercises[targetExerciseIndex].sets = NSSet(array: sets)
-        saveExercise()
+        let exercise = exercises[targetExerciseIndex]
+        
+        var lastWeight: Float = 0
+        var lastReps: Int = 0
+        
+        if let lastSet = exercise.sets.last {
+            lastWeight = lastSet.weight
+            lastReps = lastSet.reps
+        }
+        
+        let newSet = SingleSet()
+        newSet.order = exercise.sets.count
+        newSet.reps = lastReps
+        newSet.weight = lastWeight
+        
+        do{
+            try realm.write{
+                exercise.sets.append(newSet)
+            }
+        }catch{
+            print("Fail to delete an exercise")
+        }
+
     }
     
-    func saveExercise() {
-        do {
-            try coreDataContext.save()
-        } catch {
-            print("Error saving context \(error)")
+    func deleteSingleSet(targetExerciseIndex: Int, targetSetIndex: Int){
+        let exercise = exercises[targetExerciseIndex]
+        
+        do{
+            try realm.write{
+                for set in exercise.sets {
+                    if set.order > targetSetIndex {
+                        set.order = set.order - 1
+                    }
+                }
+                exercise.sets.remove(at: targetSetIndex)
+            }
+        }catch{
+            print("Fail to delete an exercise")
         }
     }
     
     func loadExercise() {
-        let request : NSFetchRequest<Exercise> = Exercise.fetchRequest()
-        do{
-            exercises = try coreDataContext.fetch(request)
-        } catch {
-            print("Error loading categories \(error)")
-        }
+        exercises = parentRutine?.exercises.sorted(byKeyPath: "order", ascending: true)
     }
 }

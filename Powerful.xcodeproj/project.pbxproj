@@ -10,10 +10,10 @@
 		561068C72489C23100F48B1C /* ExercisingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561068C62489C23100F48B1C /* ExercisingManager.swift */; };
 		561068CB248AAE7A00F48B1C /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 561068CA248AAE7A00F48B1C /* delete.png */; };
 		561068CE248AC93A00F48B1C /* SingleSetTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561068CD248AC93A00F48B1C /* SingleSetTVCell.swift */; };
+		5612D6AA248B2D3C008A9762 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5612D6A9248B2D3C008A9762 /* Models.swift */; };
 		56A586302489AC3A005E0E5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A5862F2489AC3A005E0E5B /* AppDelegate.swift */; };
 		56A586322489AC3A005E0E5B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A586312489AC3A005E0E5B /* SceneDelegate.swift */; };
 		56A586372489AC3A005E0E5B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56A586352489AC3A005E0E5B /* Main.storyboard */; };
-		56A5863A2489AC3A005E0E5B /* Powerful.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 56A586382489AC3A005E0E5B /* Powerful.xcdatamodeld */; };
 		56A5863C2489AC3B005E0E5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56A5863B2489AC3B005E0E5B /* Assets.xcassets */; };
 		56A5863F2489AC3B005E0E5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56A5863D2489AC3B005E0E5B /* LaunchScreen.storyboard */; };
 		56A5864D2489AF75005E0E5B /* ExercisingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A5864C2489AF75005E0E5B /* ExercisingViewController.swift */; };
@@ -28,11 +28,11 @@
 		561068C62489C23100F48B1C /* ExercisingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisingManager.swift; sourceTree = "<group>"; };
 		561068CA248AAE7A00F48B1C /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
 		561068CD248AC93A00F48B1C /* SingleSetTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSetTVCell.swift; sourceTree = "<group>"; };
+		5612D6A9248B2D3C008A9762 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		56A5862C2489AC3A005E0E5B /* Powerful.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Powerful.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56A5862F2489AC3A005E0E5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56A586312489AC3A005E0E5B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		56A586362489AC3A005E0E5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		56A586392489AC3A005E0E5B /* Powerful.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Powerful.xcdatamodel; sourceTree = "<group>"; };
 		56A5863B2489AC3B005E0E5B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		56A5863E2489AC3B005E0E5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		56A586402489AC3B005E0E5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -128,7 +128,7 @@
 		56A586492489ACB7005E0E5B /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
-				56A586382489AC3A005E0E5B /* Powerful.xcdatamodeld */,
+				5612D6A9248B2D3C008A9762 /* Models.swift */,
 				56A586502489B3D4005E0E5B /* Constants.swift */,
 				561068CC248AC5A200F48B1C /* Managers */,
 			);
@@ -269,9 +269,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				56A586532489B5B2005E0E5B /* RoutineManager.swift in Sources */,
-				56A5863A2489AC3A005E0E5B /* Powerful.xcdatamodeld in Sources */,
 				56A586302489AC3A005E0E5B /* AppDelegate.swift in Sources */,
 				56A586322489AC3A005E0E5B /* SceneDelegate.swift in Sources */,
+				5612D6AA248B2D3C008A9762 /* Models.swift in Sources */,
 				56A5864D2489AF75005E0E5B /* ExercisingViewController.swift in Sources */,
 				561068CE248AC93A00F48B1C /* SingleSetTVCell.swift in Sources */,
 				56A5864F2489B2F4005E0E5B /* RoutineViewController.swift in Sources */,
@@ -478,19 +478,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		56A586382489AC3A005E0E5B /* Powerful.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				56A586392489AC3A005E0E5B /* Powerful.xcdatamodel */,
-			);
-			currentVersion = 56A586392489AC3A005E0E5B /* Powerful.xcdatamodel */;
-			path = Powerful.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 56A586242489AC3A005E0E5B /* Project object */;
 }

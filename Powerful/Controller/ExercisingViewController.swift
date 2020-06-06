@@ -8,13 +8,13 @@
 
 import UIKit
 import SwipeCellKit
+import RealmSwift
 
 class ExercisingViewController: UIViewController {
     
-    var exercises: [Exercise]!
-    
+    var exercises: Results<Exercise>!
     @IBOutlet weak var exercisingTableView: UITableView!
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
     var exercisingManager : ExercisingManager!
     
     override func viewDidLoad() {
@@ -22,6 +22,7 @@ class ExercisingViewController: UIViewController {
         exercisingTableView.delegate = self
         exercisingTableView.dataSource = self
         exercises = exercisingManager?.exercises
+        
     }
     
     @IBAction func addExerciseButtonPressed(_ sender: UIButton) {
@@ -31,7 +32,7 @@ class ExercisingViewController: UIViewController {
         let action = UIAlertAction(title: "Add", style: .default) { (action) in
             if let text = textField.text{
                 if(!text.isEmpty){
-                    self.exercisingManager.addExercise(name: textField.text!, part: "Chest")
+                    self.exercisingManager.addExercise(name: textField.text!, part: "Chest") // TODO hard-code
                     self.updateUI()
                 }
             }
@@ -68,7 +69,8 @@ extension ExercisingViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return exercises[section].name
+        let exercise = exercises[section]
+        return "\(exercise.order + 1). \(exercise.name)"
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -84,21 +86,25 @@ extension ExercisingViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let sets = exercises[section].sets?.allObjects as? [SingleSet] {
-            return sets.count
-        }
-        return 0
+        return exercises[section].sets.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.CellIdentifier.ExerciseSetCell) as! SingleSetTVCell
         cell.delegate = self
         cell.repsTextField.delegate = self
-        cell.weightTextField.delegate = self
+        cell.repsTextField.tag = indexPath.section
         
-        if let sets = exercises[indexPath.section].sets?.allObjects as? [SingleSet] {
-            cell.textLabel?.text = sets[indexPath.row].previous
-        }
+        cell.weightTextField.delegate = self
+        cell.weightTextField.tag = indexPath.section
+        
+        let sets = exercises[indexPath.section].sets
+        let set = sets[indexPath.row]
+        cell.previousLabel.text = set.previous
+        cell.repsTextField.placeholder = String(set.reps)
+        cell.weightTextField.placeholder = String(format: "%.2f", set.weight)
+        cell.SetNumberLabel.text = String(set.order + 1)
+        
         return cell
     }
 
@@ -132,5 +138,9 @@ extension ExercisingViewController: SwipeTableViewCellDelegate{
 
 //MARK: - text field
 extension ExercisingViewController: UITextFieldDelegate{
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        let a = textField.restorationIdentifier!
+        print("section\(textField.tag) \(a) got changed by \(textField.text!)")
+    }
     
 }
