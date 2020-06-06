@@ -94,9 +94,11 @@ extension ExercisingViewController: UITableViewDelegate, UITableViewDataSource {
         cell.delegate = self
         cell.repsTextField.delegate = self
         cell.repsTextField.tag = indexPath.section
+        cell.repsTextField.order = indexPath.row
         
         cell.weightTextField.delegate = self
         cell.weightTextField.tag = indexPath.section
+        cell.weightTextField.order = indexPath.row
         
         let sets = exercises[indexPath.section].sets
         let set = sets[indexPath.row]
@@ -105,23 +107,22 @@ extension ExercisingViewController: UITableViewDelegate, UITableViewDataSource {
         cell.weightTextField.placeholder = String(format: "%.2f", set.weight)
         cell.SetNumberLabel.text = String(set.order + 1)
         cell.isDoneImage.image = set.isDone ? UIImage(systemName: "checkmark.square.fill") : UIImage(systemName: "checkmark.square")
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        
         exercisingManager.updateSet(exerciseIndex: indexPath.section, setIndex: indexPath.row, newWeight: nil, newReps: nil, done: !exercises[indexPath.section].sets[indexPath.row].isDone)
         
-        
         exercisingTableView.reloadData()
-        exercisingTableView.deselectRow(at: indexPath, animated: true)
+        exercisingTableView.deselectRow(at: indexPath, animated: false)
     }
 
 }
 
 
-//MARK: - SwipeTableViewCellDelegate
+//MARK: - SwipeTableViewCellDelegate Setting
 extension ExercisingViewController: SwipeTableViewCellDelegate{
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         guard orientation == .right else { return nil }
@@ -146,11 +147,22 @@ extension ExercisingViewController: SwipeTableViewCellDelegate{
 }
 
 
-//MARK: - text field
+//MARK: - Text Field For Weight and Reps
 extension ExercisingViewController: UITextFieldDelegate{
     func textFieldDidEndEditing(_ textField: UITextField) {
-        let a = textField.restorationIdentifier!
-        print("section\(textField.tag) \(a) got changed by \(textField.text!)")
+        let fieldIdentifier = textField.restorationIdentifier
+        if let order = (textField as! TVCellTextField).order, let text = textField.text  {
+            if fieldIdentifier == K.ComponentIdentifier.WeightTextField {
+                let value = (text as NSString).floatValue
+                exercisingManager.updateSet(exerciseIndex: textField.tag, setIndex: order, newWeight: value, newReps: nil)
+                
+            }else if fieldIdentifier == K.ComponentIdentifier.RepsTextField {
+                let value = (text as NSString).integerValue
+                exercisingManager.updateSet(exerciseIndex: textField.tag, setIndex: order, newWeight: nil, newReps: value)
+                
+            }
+        }
     }
     
 }
+

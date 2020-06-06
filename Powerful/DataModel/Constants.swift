@@ -12,4 +12,10 @@ struct K{
         static let StartWorkingOut = "StartWorkingOut"
     }
     
+    struct ComponentIdentifier{
+        static let RepsTextField = "Reps"
+        static let WeightTextField = "Weight"
+        
+        
+    }
 }

@@ -39,20 +39,20 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yCO-Sb-tT5">
-                                                            <rect key="frame" x="45" y="0.0" width="184" height="30.333333333333332"/>
+                                                            <rect key="frame" x="45" y="0.0" width="174" height="30.333333333333332"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" restorationIdentifier="weight" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="lbs" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GDG-Gu-YN7">
-                                                            <rect key="frame" x="244" y="0.0" width="50" height="30.333333333333332"/>
+                                                        <textField opaque="NO" contentMode="scaleToFill" restorationIdentifier="Weight" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="lbs" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GDG-Gu-YN7" customClass="TVCellTextField" customModule="Powerful" customModuleProvider="target">
+                                                            <rect key="frame" x="234" y="0.0" width="60" height="30.333333333333332"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="50" id="844-rw-qwO"/>
+                                                                <constraint firstAttribute="width" constant="60" id="844-rw-qwO"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                                         </textField>
-                                                        <textField opaque="NO" contentMode="scaleToFill" restorationIdentifier="reps" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="reps" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oZi-Qx-5cG">
+                                                        <textField opaque="NO" contentMode="scaleToFill" restorationIdentifier="Reps" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="reps" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oZi-Qx-5cG" customClass="TVCellTextField" customModule="Powerful" customModuleProvider="target">
                                                             <rect key="frame" x="309" y="0.0" width="50" height="30.333333333333332"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="50" id="KBR-IU-eXb"/>
@@ -64,7 +64,6 @@
                                                             <rect key="frame" x="374" y="0.0" width="30" height="30.333333333333332"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="30" id="IKM-rl-CdL"/>
-                                                                <constraint firstAttribute="height" constant="30" id="vg4-CL-4ls"/>
                                                             </constraints>
                                                         </imageView>
                                                     </subviews>

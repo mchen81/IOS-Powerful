@@ -14,8 +14,8 @@ class SingleSetTVCell: SwipeTableViewCell{
     @IBOutlet weak var SetNumberLabel: UILabel!
     @IBOutlet weak var previousLabel: UILabel!
     
-    @IBOutlet weak var weightTextField: UITextField!
-    @IBOutlet weak var repsTextField: UITextField!
+    @IBOutlet weak var weightTextField: TVCellTextField!
+    @IBOutlet weak var repsTextField: TVCellTextField!
     
     @IBOutlet weak var isDoneImage: UIImageView!
     
@@ -23,6 +23,8 @@ class SingleSetTVCell: SwipeTableViewCell{
     
     override class func awakeFromNib() {
         super.awakeFromNib()
+        
+        
     }
     
 }

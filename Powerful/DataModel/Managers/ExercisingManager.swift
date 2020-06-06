@@ -116,6 +116,9 @@ class ExercisingManager{
     
     
     func loadExercise() {
-        exercises = parentRutine?.exercises.sorted(byKeyPath: "order", ascending: true)
+        
+        let sorted = parentRutine?.exercises.sorted(byKeyPath: "order", ascending: true)
+        exercises = sorted
+        
     }
 }
