@@ -93,6 +93,28 @@ class ExercisingManager{
         }
     }
     
+    func updateSet(exerciseIndex: Int, setIndex: Int, newWeight: Float?, newReps: Int?, done: Bool = false){
+        let exercise = exercises[exerciseIndex]
+        let set = exercise.sets[setIndex]
+        do{
+            try realm.write{
+                set.isDone = done
+                if let w = newWeight {
+                    set.weight = w
+                }
+                
+                if let r = newReps {
+                    set.reps = r
+                }
+                
+            }
+        }catch{
+            print("Fail to delete an exercise")
+        }
+        
+    }
+    
+    
     func loadExercise() {
         exercises = parentRutine?.exercises.sorted(byKeyPath: "order", ascending: true)
     }

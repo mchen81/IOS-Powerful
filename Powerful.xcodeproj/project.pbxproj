@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		561068C72489C23100F48B1C /* ExercisingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561068C62489C23100F48B1C /* ExercisingManager.swift */; };
-		561068CB248AAE7A00F48B1C /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 561068CA248AAE7A00F48B1C /* delete.png */; };
 		561068CE248AC93A00F48B1C /* SingleSetTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561068CD248AC93A00F48B1C /* SingleSetTVCell.swift */; };
 		5612D6AA248B2D3C008A9762 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5612D6A9248B2D3C008A9762 /* Models.swift */; };
 		56A586302489AC3A005E0E5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A5862F2489AC3A005E0E5B /* AppDelegate.swift */; };
@@ -26,7 +25,6 @@
 /* Begin PBXFileReference section */
 		50FC23F21716B6130854675A /* Pods-Powerful.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Powerful.release.xcconfig"; path = "Target Support Files/Pods-Powerful/Pods-Powerful.release.xcconfig"; sourceTree = "<group>"; };
 		561068C62489C23100F48B1C /* ExercisingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisingManager.swift; sourceTree = "<group>"; };
-		561068CA248AAE7A00F48B1C /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
 		561068CD248AC93A00F48B1C /* SingleSetTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSetTVCell.swift; sourceTree = "<group>"; };
 		5612D6A9248B2D3C008A9762 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		56A5862C2489AC3A005E0E5B /* Powerful.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Powerful.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,7 +89,6 @@
 				56A586492489ACB7005E0E5B /* DataModel */,
 				56A586472489AC8B005E0E5B /* View */,
 				56A5863B2489AC3B005E0E5B /* Assets.xcassets */,
-				561068CA248AAE7A00F48B1C /* delete.png */,
 				56A586402489AC3B005E0E5B /* Info.plist */,
 			);
 			path = Powerful;
@@ -212,7 +209,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				561068CB248AAE7A00F48B1C /* delete.png in Resources */,
 				56A5863F2489AC3B005E0E5B /* LaunchScreen.storyboard in Resources */,
 				56A5863C2489AC3B005E0E5B /* Assets.xcassets in Resources */,
 				56A586372489AC3A005E0E5B /* Main.storyboard in Resources */,

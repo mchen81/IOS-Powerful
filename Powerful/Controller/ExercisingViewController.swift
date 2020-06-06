@@ -104,8 +104,18 @@ extension ExercisingViewController: UITableViewDelegate, UITableViewDataSource {
         cell.repsTextField.placeholder = String(set.reps)
         cell.weightTextField.placeholder = String(format: "%.2f", set.weight)
         cell.SetNumberLabel.text = String(set.order + 1)
-        
+        cell.isDoneImage.image = set.isDone ? UIImage(systemName: "checkmark.square.fill") : UIImage(systemName: "checkmark.square")
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
+        exercisingManager.updateSet(exerciseIndex: indexPath.section, setIndex: indexPath.row, newWeight: nil, newReps: nil, done: !exercises[indexPath.section].sets[indexPath.row].isDone)
+        
+        
+        exercisingTableView.reloadData()
+        exercisingTableView.deselectRow(at: indexPath, animated: true)
     }
 
 }
@@ -123,7 +133,7 @@ extension ExercisingViewController: SwipeTableViewCellDelegate{
         }
 
         // customize the action appearance
-        deleteAction.image = UIImage(named: "delete-icon")
+        deleteAction.image = UIImage(systemName: "trach")
 
         return [deleteAction]
     }

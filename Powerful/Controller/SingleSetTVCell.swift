@@ -17,12 +17,15 @@ class SingleSetTVCell: SwipeTableViewCell{
     @IBOutlet weak var weightTextField: UITextField!
     @IBOutlet weak var repsTextField: UITextField!
     
+    @IBOutlet weak var isDoneImage: UIImageView!
+    
+    var buttonDelegate: SwipeTableViewCellDelegate?
+    
     override class func awakeFromNib() {
         super.awakeFromNib()
-        
-        // weightTextField.delegate = self
-        // repsTextField.delegate = self
-        
     }
+    
 }
+
+
 
