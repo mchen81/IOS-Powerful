@@ -15,6 +15,7 @@ class ExercisingViewController: UIViewController {
     var exercises: Results<Exercise>!
     @IBOutlet weak var exercisingTableView: UITableView!
     
+    @IBOutlet weak var exerciseTitleLabel: UILabel!
     var exercisingManager : ExercisingManager!
     
     override func viewDidLoad() {
@@ -23,6 +24,7 @@ class ExercisingViewController: UIViewController {
         exercisingTableView.dataSource = self
         exercises = exercisingManager?.exercises
         
+        exerciseTitleLabel.text = exercisingManager.parentRutine?.name
     }
     
     @IBAction func addExerciseButtonPressed(_ sender: UIButton) {
