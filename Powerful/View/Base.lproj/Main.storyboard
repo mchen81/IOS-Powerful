@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4ZR-QF-5Ar">
-                                <rect key="frame" x="0.0" y="95" width="414" height="621"/>
+                                <rect key="frame" x="0.0" y="95" width="414" height="521"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SetCell" id="muA-fI-QMH" customClass="SingleSetTVCell" customModule="Powerful" customModuleProvider="target">
@@ -103,11 +103,21 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pbN-m0-MbD">
-                                <rect key="frame" x="293" y="32" width="101" height="44"/>
+                                <rect key="frame" x="20" y="624" width="374" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="add exercise"/>
+                                <state key="normal" title="Add Exercise">
+                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="addExerciseButtonPressed:" destination="VIZ-wk-1fK" eventType="touchUpInside" id="S2g-IF-rKi"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="28r-hD-m4Q">
+                                <rect key="frame" x="327" y="39" width="67" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Finish"/>
+                                <connections>
+                                    <action selector="finishButtonPressed:" destination="VIZ-wk-1fK" eventType="touchUpInside" id="HUO-zq-2OF"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -116,7 +126,7 @@
                             <constraint firstItem="4ZR-QF-5Ar" firstAttribute="leading" secondItem="wNa-NM-Rvh" secondAttribute="leading" id="Ige-Yz-wjM"/>
                             <constraint firstItem="4ZR-QF-5Ar" firstAttribute="top" secondItem="wNa-NM-Rvh" secondAttribute="top" constant="95" id="TfJ-cx-Wc1"/>
                             <constraint firstItem="4ZR-QF-5Ar" firstAttribute="trailing" secondItem="wNa-NM-Rvh" secondAttribute="trailing" id="Zvx-sB-B22"/>
-                            <constraint firstItem="4ZR-QF-5Ar" firstAttribute="bottom" secondItem="wNa-NM-Rvh" secondAttribute="bottom" id="gSE-Xb-OfM"/>
+                            <constraint firstItem="4ZR-QF-5Ar" firstAttribute="bottom" secondItem="wNa-NM-Rvh" secondAttribute="bottom" constant="-100" id="gSE-Xb-OfM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="wNa-NM-Rvh"/>
                     </view>

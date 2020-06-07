@@ -107,11 +107,29 @@ class ExercisingManager{
                     set.reps = r
                 }
                 
+                if set.isDone {
+                    set.previous = String(format: "%.1f x %d", set.weight, set.reps)
+                }
             }
         }catch{
             print("Fail to delete an exercise")
         }
         
+    }
+    
+    
+    func finishExercising(){
+        do{
+            try realm.write{
+                for exercise in exercises {
+                    for set in exercise.sets {
+                        set.isDone = false
+                    }
+                }
+            }
+        }catch{
+            print("Fail to finish")
+        }
     }
     
     

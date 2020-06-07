@@ -53,16 +53,25 @@ class ExercisingViewController: UIViewController {
         updateUI()
     }
     
+    @IBAction func finishButtonPressed(_ sender: UIButton) {
+        
+        self.dismiss(animated: true) {
+            self.exercisingManager.finishExercising()
+        }
+        
+    }
     func updateUI(reloadTV: Bool = true){
         exercises = exercisingManager.exercises
         if(reloadTV){
             exercisingTableView.reloadData()
         }
+        
     }
+    
     
 }
 
-
+//MARK: - Table View Setting
 extension ExercisingViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return exercises.count
@@ -118,6 +127,8 @@ extension ExercisingViewController: UITableViewDelegate, UITableViewDataSource {
         exercisingTableView.reloadData()
         exercisingTableView.deselectRow(at: indexPath, animated: false)
     }
+    
+    
 
 }
 

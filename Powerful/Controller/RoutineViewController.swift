@@ -28,10 +28,10 @@ class RoutineViewController: UIViewController{
         routineTableView.delegate = self
         routineTableView.dataSource = self
         
-        routineTableView.rowHeight = 80.0
+        routineTableView.dragInteractionEnabled = true // Enable intra-app drags for iPhone.
         
-        // let dd = NSSortDescriptor(
-        // print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+        routineTableView.rowHeight = 80.0
+
     }
     
     @IBAction func addRoutinePressed(_ sender: UIButton) {
@@ -120,3 +120,5 @@ extension RoutineViewController: SwipeTableViewCellDelegate{
         return options
     }
 }
+
+
