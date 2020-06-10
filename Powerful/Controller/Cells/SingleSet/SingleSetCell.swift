@@ -16,7 +16,7 @@ class SingleSetCell: SwipeTableViewCell {
     @IBOutlet weak var weightTextField: UITextField!
     @IBOutlet weak var repsTextField: UITextField!
     @IBOutlet weak var doneImageView: UIImageView!
-
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()

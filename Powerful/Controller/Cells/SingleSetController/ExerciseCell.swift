@@ -31,7 +31,9 @@ class ExerciseCell: UITableViewCell { // AKA sets controller
         tableView.rowHeight = 36
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UINib(nibName: "SingleSetCell", bundle: nil), forCellReuseIdentifier: "SingleSetCell")
+        
+        tableView.register(UINib(nibName: K.NibName.SingleSetCell, bundle: nil),
+                           forCellReuseIdentifier: K.CellIdentifier.SingleSetCell)
     }
 
     
@@ -40,8 +42,8 @@ class ExerciseCell: UITableViewCell { // AKA sets controller
     }
     
     @IBAction func editButtonPressed(_ sender: UIButton) {
-        let popview = UIStoryboard(name: "Main", bundle: nil)
-            .instantiateViewController(withIdentifier: "EdtingExerciseView") as! EditingExerciseController
+        let popview = UIStoryboard(name: K.NibName.Main, bundle: nil)
+            .instantiateViewController(withIdentifier: K.ViewControllerIdentifier.EdtingExerciseView) as! EditingExerciseController
         
         let buttonPosition = sender.convert(CGPoint.zero, to: self.superview?.superview)
         
@@ -74,7 +76,7 @@ extension ExerciseCell: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SingleSetCell") as! SingleSetCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.CellIdentifier.SingleSetCell) as! SingleSetCell
         if let setInfo = setsManager?.sets[indexPath.row]{
             cell.delegate = self
             

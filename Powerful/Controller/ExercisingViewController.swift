@@ -24,7 +24,8 @@ class ExercisingViewController: UIViewController {
         exercisingTableView.dataSource = self
         exercisingTableView.delegate = self
         
-        exercisingTableView.register(UINib(nibName: "ExerciseCell", bundle: nil), forCellReuseIdentifier: "ExerciseCell")
+        exercisingTableView.register(UINib(nibName: K.NibName.ExerciseCell, bundle: nil),
+                                     forCellReuseIdentifier: K.CellIdentifier.ExerciseCell)
         
     }
     @IBAction func addExercisePressed(_ sender: UIButton) {
@@ -79,7 +80,7 @@ extension ExercisingViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "ExerciseCell") as? ExerciseCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: K.CellIdentifier.ExerciseCell) as? ExerciseCell {
             cell.ecDelegate = self
             let setsManager = SingleSetsManager()
             setsManager.parentExercise = exercisingManager?.exercises[indexPath.row]
