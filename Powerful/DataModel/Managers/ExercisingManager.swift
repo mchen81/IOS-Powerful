@@ -49,75 +49,7 @@ class ExercisingManager{
         }
         
     }
-    
-    func addSingleSet(targetExerciseIndex: Int){
-        let exercise = exercises[targetExerciseIndex]
-        
-        var lastWeight: Float = 0
-        var lastReps: Int = 0
-        
-        if let lastSet = exercise.sets.last {
-            lastWeight = lastSet.weight
-            lastReps = lastSet.reps
-        }
-        
-        let newSet = SingleSet()
-        newSet.order = exercise.sets.count
-        newSet.reps = lastReps
-        newSet.weight = lastWeight
-        
-        do{
-            try realm.write{
-                exercise.sets.append(newSet)
-            }
-        }catch{
-            print("Fail to delete an exercise")
-        }
 
-    }
-    
-    func deleteSingleSet(targetExerciseIndex: Int, targetSetIndex: Int){
-        let exercise = exercises[targetExerciseIndex]
-        
-        do{
-            try realm.write{
-                for set in exercise.sets {
-                    if set.order > targetSetIndex {
-                        set.order = set.order - 1
-                    }
-                }
-                exercise.sets.remove(at: targetSetIndex)
-            }
-        }catch{
-            print("Fail to delete an exercise")
-        }
-    }
-    
-    func updateSet(exerciseIndex: Int, setIndex: Int, newWeight: Float?, newReps: Int?, done: Bool = false){
-        let exercise = exercises[exerciseIndex]
-        let set = exercise.sets[setIndex]
-        do{
-            try realm.write{
-                set.isDone = done
-                if let w = newWeight {
-                    set.weight = w
-                }
-                
-                if let r = newReps {
-                    set.reps = r
-                }
-                
-                if set.isDone {
-                    set.previous = String(format: "%.1f x %d", set.weight, set.reps)
-                }
-            }
-        }catch{
-            print("Fail to delete an exercise")
-        }
-        
-    }
-    
-    
     func finishExercising(){
         do{
             try realm.write{
@@ -132,9 +64,7 @@ class ExercisingManager{
         }
     }
     
-    
     func loadExercise() {
-        
         let sorted = parentRutine?.exercises.sorted(byKeyPath: "order", ascending: true)
         exercises = sorted
         

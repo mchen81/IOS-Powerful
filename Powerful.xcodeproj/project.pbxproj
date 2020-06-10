@@ -8,9 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		561068C72489C23100F48B1C /* ExercisingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561068C62489C23100F48B1C /* ExercisingManager.swift */; };
-		561068CE248AC93A00F48B1C /* SingleSetTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561068CD248AC93A00F48B1C /* SingleSetTVCell.swift */; };
 		5612D6AA248B2D3C008A9762 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5612D6A9248B2D3C008A9762 /* Models.swift */; };
-		564F162A248C21900082184D /* TVCellTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564F1629248C21900082184D /* TVCellTextField.swift */; };
 		56A586302489AC3A005E0E5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A5862F2489AC3A005E0E5B /* AppDelegate.swift */; };
 		56A586322489AC3A005E0E5B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A586312489AC3A005E0E5B /* SceneDelegate.swift */; };
 		56A586372489AC3A005E0E5B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56A586352489AC3A005E0E5B /* Main.storyboard */; };
@@ -20,15 +18,18 @@
 		56A5864F2489B2F4005E0E5B /* RoutineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A5864E2489B2F4005E0E5B /* RoutineViewController.swift */; };
 		56A586512489B3D4005E0E5B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A586502489B3D4005E0E5B /* Constants.swift */; };
 		56A586532489B5B2005E0E5B /* RoutineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A586522489B5B2005E0E5B /* RoutineManager.swift */; };
+		56A743B324903A5A0000467F /* SingleSetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A743B124903A5A0000467F /* SingleSetCell.swift */; };
+		56A743B424903A5A0000467F /* SingleSetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56A743B224903A5A0000467F /* SingleSetCell.xib */; };
+		56A743B724903E370000467F /* ExerciseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A743B524903E370000467F /* ExerciseCell.swift */; };
+		56A743B824903E370000467F /* ExerciseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56A743B624903E370000467F /* ExerciseCell.xib */; };
+		56A743BA249043830000467F /* SingleSetsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A743B9249043830000467F /* SingleSetsManager.swift */; };
 		CAB8536DC0C27D789F0D0874 /* Pods_Powerful.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73F3187CB2A93825DB9CFC42 /* Pods_Powerful.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		50FC23F21716B6130854675A /* Pods-Powerful.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Powerful.release.xcconfig"; path = "Target Support Files/Pods-Powerful/Pods-Powerful.release.xcconfig"; sourceTree = "<group>"; };
 		561068C62489C23100F48B1C /* ExercisingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisingManager.swift; sourceTree = "<group>"; };
-		561068CD248AC93A00F48B1C /* SingleSetTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSetTVCell.swift; sourceTree = "<group>"; };
 		5612D6A9248B2D3C008A9762 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
-		564F1629248C21900082184D /* TVCellTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVCellTextField.swift; sourceTree = "<group>"; };
 		56A5862C2489AC3A005E0E5B /* Powerful.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Powerful.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56A5862F2489AC3A005E0E5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56A586312489AC3A005E0E5B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -40,6 +41,11 @@
 		56A5864E2489B2F4005E0E5B /* RoutineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineViewController.swift; sourceTree = "<group>"; };
 		56A586502489B3D4005E0E5B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		56A586522489B5B2005E0E5B /* RoutineManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineManager.swift; sourceTree = "<group>"; };
+		56A743B124903A5A0000467F /* SingleSetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSetCell.swift; sourceTree = "<group>"; };
+		56A743B224903A5A0000467F /* SingleSetCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SingleSetCell.xib; sourceTree = "<group>"; };
+		56A743B524903E370000467F /* ExerciseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCell.swift; sourceTree = "<group>"; };
+		56A743B624903E370000467F /* ExerciseCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExerciseCell.xib; sourceTree = "<group>"; };
+		56A743B9249043830000467F /* SingleSetsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSetsManager.swift; sourceTree = "<group>"; };
 		73F3187CB2A93825DB9CFC42 /* Pods_Powerful.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Powerful.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D573204585909DC95B260C9F /* Pods-Powerful.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Powerful.debug.xcconfig"; path = "Target Support Files/Pods-Powerful/Pods-Powerful.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -61,16 +67,9 @@
 			children = (
 				56A586522489B5B2005E0E5B /* RoutineManager.swift */,
 				561068C62489C23100F48B1C /* ExercisingManager.swift */,
+				56A743B9249043830000467F /* SingleSetsManager.swift */,
 			);
 			path = Managers;
-			sourceTree = "<group>";
-		};
-		564F1628248C21520082184D /* UIComponents */ = {
-			isa = PBXGroup;
-			children = (
-				564F1629248C21900082184D /* TVCellTextField.swift */,
-			);
-			path = UIComponents;
 			sourceTree = "<group>";
 		};
 		56A586232489AC3A005E0E5B = {
@@ -125,10 +124,9 @@
 		56A586482489AC9B005E0E5B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				564F1628248C21520082184D /* UIComponents */,
+				56A743B024903A180000467F /* Cells */,
 				56A5864C2489AF75005E0E5B /* ExercisingViewController.swift */,
 				56A5864E2489B2F4005E0E5B /* RoutineViewController.swift */,
-				561068CD248AC93A00F48B1C /* SingleSetTVCell.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -141,6 +139,17 @@
 				561068CC248AC5A200F48B1C /* Managers */,
 			);
 			path = DataModel;
+			sourceTree = "<group>";
+		};
+		56A743B024903A180000467F /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				56A743B124903A5A0000467F /* SingleSetCell.swift */,
+				56A743B224903A5A0000467F /* SingleSetCell.xib */,
+				56A743B524903E370000467F /* ExerciseCell.swift */,
+				56A743B624903E370000467F /* ExerciseCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		882FB39A88FC01EA0C885E38 /* Frameworks */ = {
@@ -220,7 +229,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56A743B424903A5A0000467F /* SingleSetCell.xib in Resources */,
 				56A5863F2489AC3B005E0E5B /* LaunchScreen.storyboard in Resources */,
+				56A743B824903E370000467F /* ExerciseCell.xib in Resources */,
 				56A5863C2489AC3B005E0E5B /* Assets.xcassets in Resources */,
 				56A586372489AC3A005E0E5B /* Main.storyboard in Resources */,
 			);
@@ -279,11 +290,12 @@
 				56A586302489AC3A005E0E5B /* AppDelegate.swift in Sources */,
 				56A586322489AC3A005E0E5B /* SceneDelegate.swift in Sources */,
 				5612D6AA248B2D3C008A9762 /* Models.swift in Sources */,
+				56A743BA249043830000467F /* SingleSetsManager.swift in Sources */,
 				56A5864D2489AF75005E0E5B /* ExercisingViewController.swift in Sources */,
-				561068CE248AC93A00F48B1C /* SingleSetTVCell.swift in Sources */,
+				56A743B724903E370000467F /* ExerciseCell.swift in Sources */,
 				56A5864F2489B2F4005E0E5B /* RoutineViewController.swift in Sources */,
-				564F162A248C21900082184D /* TVCellTextField.swift in Sources */,
 				561068C72489C23100F48B1C /* ExercisingManager.swift in Sources */,
+				56A743B324903A5A0000467F /* SingleSetCell.swift in Sources */,
 				56A586512489B3D4005E0E5B /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
