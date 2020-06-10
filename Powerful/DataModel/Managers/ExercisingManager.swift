@@ -64,6 +64,10 @@ class ExercisingManager{
         }
     }
     
+    func getExercisesCount() -> Int{
+        return exercises.count
+    }
+    
     func loadExercise() {
         let sorted = parentRutine?.exercises.sorted(byKeyPath: "order", ascending: true)
         exercises = sorted

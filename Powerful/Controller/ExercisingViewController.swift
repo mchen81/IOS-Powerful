@@ -16,15 +16,14 @@ class ExercisingViewController: UIViewController {
     @IBOutlet weak var exercisingTableView: UITableView!
     @IBOutlet weak var exerciseTitleLabel: UILabel!
     
-    var exercisingManager : ExercisingManager!
-    var exercises: Results<Exercise>!
+    var exercisingManager : ExercisingManager?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        exercises = exercisingManager.exercises
+        
         exercisingTableView.dataSource = self
         exercisingTableView.delegate = self
- 
+        
         exercisingTableView.register(UINib(nibName: "ExerciseCell", bundle: nil), forCellReuseIdentifier: "ExerciseCell")
         
     }
@@ -35,8 +34,9 @@ class ExercisingViewController: UIViewController {
         let action = UIAlertAction(title: "Add", style: .default) { (action) in
             if let text = textField.text{
                 if(!text.isEmpty){
-                    self.exercisingManager.addExercise(name: textField.text!, part: "Chest") // TODO hard-code
+                    self.exercisingManager?.addExercise(name: textField.text!, part: "Chest") // TODO hard-code
                     self.updateUI()
+                    self.scrollToBottom()
                 }
             }
         }
@@ -54,20 +54,17 @@ class ExercisingViewController: UIViewController {
     @IBAction func finishButtonPressed(_ sender: UIButton) {
         
         self.dismiss(animated: true) {
-            self.exercisingManager.finishExercising()
+            self.exercisingManager?.finishExercising()
         }
         
     }
     
     @IBAction func cancelButtonPressed(_ sender: UIButton) {
         self.dismiss(animated: true) {
-            self.exercisingManager.finishExercising()
+            self.exercisingManager?.finishExercising()
         }
     }
-    func updateUI(){
-        exercises = exercisingManager.exercises
-        exercisingTableView.reloadData()
-    }
+    
     
 }
 
@@ -75,32 +72,56 @@ class ExercisingViewController: UIViewController {
 //MARK: - UI Table View
 extension ExercisingViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return exercises.count
+        if let exManger = exercisingManager {
+            return exManger.getExercisesCount()
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ExerciseCell") as! ExerciseCell
-        // cell.parentTableView = exercisingTableView
-        // prepare exercise manager
-        cell.ecDelegate = self
-        let setsManager = SingleSetsManager()
-        setsManager.parentExercise = exercises[indexPath.row]
-        cell.setsManager = setsManager
-        cell.titleLabel.text = setsManager.parentExercise?.name
-        cell.updateUI()
-        
-        return cell
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "ExerciseCell") as? ExerciseCell {
+            cell.ecDelegate = self
+            let setsManager = SingleSetsManager()
+            setsManager.parentExercise = exercisingManager?.exercises[indexPath.row]
+            cell.setsManager = setsManager
+            cell.titleLabel.text = setsManager.parentExercise?.name
+            cell.updateCellUI()
+            return cell
+        }
+        return UITableViewCell()
         
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let exercise = exercises[indexPath.row]
-        return CGFloat(exercise.sets.count * 36 + 70)
+        if let exercise = exercisingManager?.exercises[indexPath.row]{
+            return CGFloat(exercise.sets.count * 36 + 70)
+        }
+        return 0
+    }
+    
+    func scrollToBottom(){
+        DispatchQueue.main.async {
+            if let manager = self.exercisingManager {
+                let indexPath = IndexPath(row: manager.getExercisesCount() - 1, section: 0)
+                self.exercisingTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+            }
+        }
     }
     
 }
 
 
-extension ExercisingViewController: ECDelegate{
+extension ExercisingViewController: ExerciseCellDelegate{
+    
+    func updateUI(){
+        exercisingTableView.reloadData()
+    }
+    
+    func popUpViewController(with subViewController: EditingExerciseController) {
+        self.addChild(subViewController)
+        subViewController.view.frame = self.view.frame
+        self.view.addSubview(subViewController.view)
+        subViewController.didMove(toParent: self)
+    }
     
 }

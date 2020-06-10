@@ -10,8 +10,9 @@ import UIKit
 import SwipeCellKit
 import RealmSwift
 
-protocol ECDelegate {
+protocol ExerciseCellDelegate {
     func updateUI()
+    func popUpViewController(with subViewController: EditingExerciseController)
 }
 
 
@@ -22,10 +23,8 @@ class ExerciseCell: UITableViewCell { // AKA sets controller
     @IBOutlet weak var tableView: UITableView!
     
  
-    var setsManager :SingleSetsManager?
-    var sets: Results<SingleSet>?
-    
-    var ecDelegate: ECDelegate!
+    var setsManager: SingleSetsManager?
+    var ecDelegate: ExerciseCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -41,20 +40,29 @@ class ExerciseCell: UITableViewCell { // AKA sets controller
     }
     
     @IBAction func editButtonPressed(_ sender: UIButton) {
-        print("Edit Button Pressed")
+        let popview = UIStoryboard(name: "Main", bundle: nil)
+            .instantiateViewController(withIdentifier: "EdtingExerciseView") as! EditingExerciseController
+        
+        let buttonPosition = sender.convert(CGPoint.zero, to: self.superview?.superview)
+        
+        popview.x = buttonPosition.x - 280
+        popview.y = buttonPosition.y + 10
+        
+        ecDelegate?.popUpViewController(with: popview)
+        
+        print("\(buttonPosition)")
     }
     
     @IBAction func addExercisedButtonPressed(_ sender: UIButton) {
         setsManager?.addSingleSet()
-        ecDelegate.updateUI()
-        updateUI()
+        ecDelegate?.updateUI()
+        updateCellUI()
      }
     
-    func updateUI(reloadTableView: Bool = true){
-        sets = setsManager?.sets
-        if(reloadTableView){
-            tableView.reloadData()
-        }
+    
+    func updateCellUI(){
+        tableView.reloadData()
+        
     }
     
 }
@@ -67,7 +75,7 @@ extension ExerciseCell: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SingleSetCell") as! SingleSetCell
-        if let setInfo = sets?[indexPath.row]{
+        if let setInfo = setsManager?.sets[indexPath.row]{
             cell.delegate = self
             
             cell.delegate = self
@@ -107,8 +115,7 @@ extension ExerciseCell: SwipeTableViewCellDelegate{
         
         let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
             self.setsManager!.deleteSingleSet(at: indexPath.row)
-            self.updateUI(reloadTableView: false)
-            self.ecDelegate.updateUI()
+            self.ecDelegate?.updateUI()
         }
         deleteAction.image = UIImage(systemName: "trach")
         return [deleteAction]

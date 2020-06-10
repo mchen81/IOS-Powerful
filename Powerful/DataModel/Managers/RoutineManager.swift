@@ -3,8 +3,15 @@ import RealmSwift
 
 class RoutineManager{
     
-    var routines: Results<Routine>?
+    var routines: Results<Routine>!
     let realm = try! Realm()
+    
+    init(willLoadRoutine: Bool) {
+        if willLoadRoutine{
+            loadRoutine()
+        }
+    }
+    
     
     func addRoutine(name: String) {
         let newRoutine = Routine()
@@ -27,8 +34,10 @@ class RoutineManager{
         }
     }
     
+    func getRoutinesCount() -> Int {
+        return routines.count
+    }
     
-    //MARK: - Data Manipulation Methods
     func loadRoutine() {
         routines = realm.objects(Routine.self)
     }
