@@ -59,6 +59,11 @@ class ExercisingViewController: UIViewController {
         
     }
     
+    @IBAction func cancelButtonPressed(_ sender: UIButton) {
+        self.dismiss(animated: true) {
+            self.exercisingManager.finishExercising()
+        }
+    }
     func updateUI(){
         exercises = exercisingManager.exercises
         exercisingTableView.reloadData()

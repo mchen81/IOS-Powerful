@@ -120,7 +120,7 @@
                                                     <color key="titleColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="cancelWorkOutButtonPressed:" destination="VIZ-wk-1fK" eventType="touchUpInside" id="hZ3-cj-v6Z"/>
+                                                    <action selector="cancelButtonPressed:" destination="VIZ-wk-1fK" eventType="touchUpInside" id="c0o-DW-200"/>
                                                 </connections>
                                             </button>
                                         </subviews>

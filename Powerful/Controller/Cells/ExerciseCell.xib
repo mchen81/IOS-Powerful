@@ -26,13 +26,13 @@
                                         <rect key="frame" x="0.0" y="0.0" width="410" height="40"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Exercing Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7HV-Rl-Ypa">
-                                                <rect key="frame" x="10" y="11" width="103.5" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
+                                                <rect key="frame" x="15" y="11" width="118" height="21"/>
+                                                <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="18"/>
+                                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f0F-dr-iqA">
-                                                <rect key="frame" x="382.5" y="3" width="17.5" height="35"/>
+                                                <rect key="frame" x="372.5" y="3" width="17.5" height="35"/>
                                                 <state key="normal" image="pencil" catalog="system"/>
                                                 <connections>
                                                     <action selector="editButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="bGR-xa-4Iu"/>
@@ -41,13 +41,13 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="f0F-dr-iqA" secondAttribute="trailing" constant="10" id="1ky-eu-uHk"/>
+                                            <constraint firstAttribute="trailing" secondItem="f0F-dr-iqA" secondAttribute="trailing" constant="20" id="1ky-eu-uHk"/>
                                             <constraint firstAttribute="bottom" secondItem="f0F-dr-iqA" secondAttribute="bottom" constant="2" id="SWE-jo-cHb"/>
                                             <constraint firstAttribute="height" constant="40" id="Wjh-T5-ke6"/>
                                             <constraint firstItem="7HV-Rl-Ypa" firstAttribute="top" secondItem="3RH-bP-jqw" secondAttribute="top" constant="11" id="ao6-st-CzO"/>
                                             <constraint firstItem="f0F-dr-iqA" firstAttribute="top" secondItem="3RH-bP-jqw" secondAttribute="top" constant="3" id="o83-B3-J3o"/>
                                             <constraint firstAttribute="bottom" secondItem="7HV-Rl-Ypa" secondAttribute="bottom" constant="8" id="oPZ-1e-zEF"/>
-                                            <constraint firstItem="7HV-Rl-Ypa" firstAttribute="leading" secondItem="3RH-bP-jqw" secondAttribute="leading" constant="10" id="thb-cm-exh"/>
+                                            <constraint firstItem="7HV-Rl-Ypa" firstAttribute="leading" secondItem="3RH-bP-jqw" secondAttribute="leading" constant="15" id="thb-cm-exh"/>
                                         </constraints>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XZo-gW-YTs">
