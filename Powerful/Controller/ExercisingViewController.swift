@@ -15,9 +15,11 @@ class ExercisingViewController: UIViewController {
     //MARK: - Outlet
     @IBOutlet weak var exercisingTableView: UITableView!
     @IBOutlet weak var exerciseTitleLabel: UILabel!
+    @IBOutlet weak var workingTimerLabel: UILabel!
     
     var exercisingManager : ExercisingManager?
-    
+    var timer = Timer()
+    var workingTimerInSec = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,8 +28,19 @@ class ExercisingViewController: UIViewController {
         
         exercisingTableView.register(UINib(nibName: K.NibName.ExerciseCell, bundle: nil),
                                      forCellReuseIdentifier: K.CellIdentifier.ExerciseCell)
+
+        exerciseTitleLabel.text = exercisingManager?.parentRutine?.name
+        
+        workingTimerLabel.text = "00:00"
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target:self, selector: #selector(updateTimer), userInfo:nil, repeats: true)
         
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        // print("view disappear")
+        timer.invalidate()
+    }
+    
     @IBAction func addExercisePressed(_ sender: UIButton) {
         // alert
         var textField = UITextField()
@@ -66,6 +79,25 @@ class ExercisingViewController: UIViewController {
         }
     }
     
+    @objc func updateTimer(){
+        workingTimerInSec += 1
+        var hour = 0
+        var min = 0
+        var sec = 0
+        
+        if workingTimerInSec >= 60 {
+            min = Int(workingTimerInSec / 60)
+            if min >= 60 {
+                hour = Int(min / 60)
+                min = min % 60
+            }
+            sec = workingTimerInSec % 60
+        }else{
+            sec = workingTimerInSec
+        }
+        let timeString = hour == 0 ? String(format: "%02d:%02d", min, sec) : String(format: "$d:%02d:%02d", hour, min, sec)
+        workingTimerLabel.text =  timeString
+    }
     
 }
 

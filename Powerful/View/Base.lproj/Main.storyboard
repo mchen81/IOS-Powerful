@@ -153,6 +153,7 @@
                     <connections>
                         <outlet property="exerciseTitleLabel" destination="X0X-sJ-mAt" id="HuN-y1-egJ"/>
                         <outlet property="exercisingTableView" destination="4ZR-QF-5Ar" id="hoN-9o-6Ej"/>
+                        <outlet property="workingTimerLabel" destination="zW4-Bw-V4s" id="aYt-lJ-iUf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D45-dK-S2X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
