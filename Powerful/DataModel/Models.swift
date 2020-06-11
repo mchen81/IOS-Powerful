@@ -19,10 +19,14 @@ class Exercise: Object{
 
 class SingleSet: Object{
     @objc dynamic var order: Int = 0
-    @objc dynamic var previous: String? = nil
+    // @objc dynamic var previous: String? = nil
     @objc dynamic var reps: Int = 0
     @objc dynamic var weight: Float = 0
     @objc dynamic var isDone: Bool = false
     
     var parentExercise = LinkingObjects(fromType: Exercise.self, property: "sets")
+    
+    func getPrevious() -> String {
+        return String(format: "%.1f x %d", weight,  reps)
+    }
 }

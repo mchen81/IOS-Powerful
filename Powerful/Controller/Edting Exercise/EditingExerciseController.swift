@@ -8,27 +8,47 @@
 
 import UIKit
 
+protocol EditingExerciseDelegate{
+    func delete(at index: Int)
+    func rename(at index: Int, name: String)
+    func setTimer(at index: Int, seconds: Int)
+}
+
+
 class EditingExerciseController: UIViewController {
 
-    var settingView: UIView!
-    
-    var x: CGFloat?
-    var y: CGFloat?
+    var settingView: UIView?
+    var buttonPosition: CGPoint?
+    var delegate: EditingExerciseDelegate?
+    var order: Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // x = 10
-        // y = 10
-        
-        settingView = UIView(frame: CGRect(x: x!, y: y!, width: 300, height: 100))
-        settingView.backgroundColor = .yellow
-        installDeleteButton()
-        
-        
-        
-        view.addSubview(settingView)
-        // Do any additional setup after loading the view.
+        if let position = buttonPosition {
+            var x, y: CGFloat
+            let height = CGFloat(150)
+            let width = CGFloat(100)
+            
+            x = position.x - width
+            
+            let offset = CGFloat(30)
+            if position.y > (view.frame.height / 2) { // showing above the button
+                y = position.y - height + offset
+            } else {  // showing down
+                y = position.y + offset
+            }
+
+            settingView = UIView(frame:
+                CGRect(x: x, y: y, width: width, height: height))
+            
+            settingView?.layer.cornerRadius = 10
+            settingView!.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.2235294118, blue: 0.3764705882, alpha: 1)
+            installRenameButton()
+            installSetTimerButton()
+            installDeleteButton()
+            view.addSubview(settingView!)
+        }
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -39,28 +59,86 @@ class EditingExerciseController: UIViewController {
         }
     }
     
+    func installRenameButton(){
+        let renameButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
+        renameButton.setTitle("Rename", for: .normal)
+        renameButton.setTitleColor(.white, for: .normal)
+        renameButton.addTarget(self, action: #selector(renameButtonPressed), for: .touchUpInside)
+        settingView!.addSubview(renameButton)
+    }
+    
+    func installSetTimerButton(){
+        let setTimerButton = UIButton(frame: CGRect(x: 0, y: 50, width: 100, height: 50))
+        setTimerButton.setTitle("Set Timer", for: .normal)
+        setTimerButton.setTitleColor(.yellow, for: .normal)
+        setTimerButton.addTarget(self, action: #selector(setTimerButtonPressed), for: .touchUpInside)
+        settingView!.addSubview(setTimerButton)
+    }
     
     func installDeleteButton(){
-        let delete = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
-        delete.setTitle("Delete", for: .normal)
-        delete.setTitleColor(.black, for: .normal)
-        delete.addTarget(self, action: #selector(deleteButtonPressed(_:)), for: .touchUpInside)
-        settingView.addSubview(delete)
+        let deleteButton = UIButton(frame: CGRect(x: 0, y: 100, width: 100, height: 50))
+        deleteButton.setTitle("Delete", for: .normal)
+        deleteButton.setTitleColor(.red, for: .normal)
+        deleteButton.addTarget(self, action: #selector(deleteButtonPressed), for: .touchUpInside)
+        settingView!.addSubview(deleteButton)
+    }
+    
+    @objc func renameButtonPressed(_ sender: UIButton){
+        print("edit got pressed")
+        var textField = UITextField()
+        let alert = UIAlertController(title: "New Name", message: "", preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default) { (action) in
+            if let text = textField.text{
+                if(!text.isEmpty){
+                    self.delegate?.rename(at: self.order, name: text)
+                    self.leaveSetting()
+                }
+            }
+        }
+        alert.addAction(action)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addTextField { (field) in
+            textField = field
+            textField.placeholder = "Give a new name"
+        }
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func setTimerButtonPressed(_ sender: UIButton){
+        print("time set got pressed")
+        
+        var textField = UITextField()
+        textField.keyboardType = .numberPad
+        
+        let alert = UIAlertController(title: "New Timer", message: "unit: second", preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default) { (action) in
+            if let text = textField.text{
+                if(!text.isEmpty){
+                    self.delegate?.setTimer(at: self.order, seconds: Int(text) ?? 0)
+                    self.leaveSetting()
+                }
+            }
+        }
+        alert.addAction(action)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addTextField { (field) in
+            textField = field
+            textField.placeholder = "Give a new timer"
+        }
+        present(alert, animated: true, completion: nil)
         
     }
     
     @objc func deleteButtonPressed(_ sender: UIButton){
         print("delete got pressed")
+        delegate?.delete(at: self.order)
+        leaveSetting()
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    func leaveSetting(){
+        self.view.isHidden = true
     }
-    */
-
+    
 }

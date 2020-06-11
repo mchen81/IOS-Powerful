@@ -22,19 +22,37 @@ class ExercisingManager{
         
         let defaultSet = SingleSet()
         defaultSet.order = 0
-        defaultSet.previous = ""
         
         newExercise.sets.append(defaultSet)
         
         do{
             try realm.write {
                 parentRutine?.exercises.append(newExercise)
-                // realm.add(newExercise)
             }
         }catch{
             print("Faild to add exercise")
         }
         
+    }
+    
+    func renameExercise(at index: Int, newName: String){
+        do{
+            try realm.write {
+                exercises[index].name = newName
+            }
+        }catch{
+            print("Faild to rename exercise" )
+        }
+    }
+    
+    func setRestTimer(at index: Int, timeInSecond: Int){
+        do{
+            try realm.write {
+                exercises[index].restTime = timeInSecond
+            }
+        }catch{
+            print("Faild to rename exercise" )
+        }
     }
     
     func deleteExercise(targetIndex: Int){
@@ -63,6 +81,9 @@ class ExercisingManager{
             print("Fail to finish")
         }
     }
+    
+
+    
     
     func getExercisesCount() -> Int{
         return exercises.count

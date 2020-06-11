@@ -50,7 +50,7 @@
                                             <constraint firstItem="7HV-Rl-Ypa" firstAttribute="leading" secondItem="3RH-bP-jqw" secondAttribute="leading" constant="15" id="thb-cm-exh"/>
                                         </constraints>
                                     </view>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XZo-gW-YTs">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XZo-gW-YTs">
                                         <rect key="frame" x="0.0" y="40" width="410" height="260"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     </tableView>
@@ -95,6 +95,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="editButton" destination="f0F-dr-iqA" id="MLz-vP-HBD"/>
                 <outlet property="tableView" destination="XZo-gW-YTs" id="HMH-gc-dMQ"/>
                 <outlet property="titleLabel" destination="7HV-Rl-Ypa" id="mnP-wz-7xU"/>
             </connections>

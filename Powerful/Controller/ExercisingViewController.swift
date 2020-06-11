@@ -35,7 +35,7 @@ class ExercisingViewController: UIViewController {
         let action = UIAlertAction(title: "Add", style: .default) { (action) in
             if let text = textField.text{
                 if(!text.isEmpty){
-                    self.exercisingManager?.addExercise(name: textField.text!, part: "Chest") // TODO hard-code
+                    self.exercisingManager?.addExercise(name: textField.text!, part: "None") // TODO hard-code
                     self.updateUI()
                     self.scrollToBottom()
                 }
@@ -85,6 +85,8 @@ extension ExercisingViewController: UITableViewDataSource, UITableViewDelegate{
             let setsManager = SingleSetsManager()
             setsManager.parentExercise = exercisingManager?.exercises[indexPath.row]
             cell.setsManager = setsManager
+            cell.editingExerciseDelegate = self
+            cell.order = indexPath.row
             cell.titleLabel.text = setsManager.parentExercise?.name
             cell.updateCellUI()
             return cell
@@ -124,5 +126,24 @@ extension ExercisingViewController: ExerciseCellDelegate{
         self.view.addSubview(subViewController.view)
         subViewController.didMove(toParent: self)
     }
+    
+}
+
+extension ExercisingViewController: EditingExerciseDelegate{
+    func delete(at index: Int) {
+        print("Delete Target: \(index)")
+        exercisingManager?.deleteExercise(targetIndex: index)
+        updateUI()
+    }
+    
+    func rename(at index: Int, name: String) {
+        exercisingManager?.renameExercise(at: index, newName: name)
+        updateUI()
+    }
+    
+    func setTimer(at index: Int, seconds: Int) {
+        exercisingManager?.setRestTimer(at: index, timeInSecond: seconds)
+    }
+    
     
 }

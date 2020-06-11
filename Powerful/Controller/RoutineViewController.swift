@@ -48,8 +48,6 @@ class RoutineViewController: UIViewController{
         }
         
         present(alert, animated: true, completion: nil)
-        
-        
     }
     
     // prepare to go to exercising view

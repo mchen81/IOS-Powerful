@@ -63,10 +63,6 @@ class SingleSetsManager{
                 if let r = newReps {
                     set.reps = r
                 }
-                
-                if set.isDone {
-                    set.previous = String(format: "%.1f x %d", set.weight, set.reps)
-                }
             }
         }catch{
             print("Fail to update a set")

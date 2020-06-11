@@ -22,16 +22,18 @@ class ExerciseCell: UITableViewCell { // AKA sets controller
     
     @IBOutlet weak var tableView: UITableView!
     
- 
+    @IBOutlet weak var editButton: UIButton!
     var setsManager: SingleSetsManager?
     var ecDelegate: ExerciseCellDelegate?
+    var editingExerciseDelegate: EditingExerciseDelegate?
+    
+    var order: Int!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         tableView.rowHeight = 36
         tableView.delegate = self
         tableView.dataSource = self
-        
         tableView.register(UINib(nibName: K.NibName.SingleSetCell, bundle: nil),
                            forCellReuseIdentifier: K.CellIdentifier.SingleSetCell)
     }
@@ -45,14 +47,13 @@ class ExerciseCell: UITableViewCell { // AKA sets controller
         let popview = UIStoryboard(name: K.NibName.Main, bundle: nil)
             .instantiateViewController(withIdentifier: K.ViewControllerIdentifier.EdtingExerciseView) as! EditingExerciseController
         
+        // get the button absolute coordinate
         let buttonPosition = sender.convert(CGPoint.zero, to: self.superview?.superview)
-        
-        popview.x = buttonPosition.x - 280
-        popview.y = buttonPosition.y + 10
+        popview.buttonPosition = buttonPosition
+        popview.delegate = editingExerciseDelegate
+        popview.order = order
         
         ecDelegate?.popUpViewController(with: popview)
-        
-        print("\(buttonPosition)")
     }
     
     @IBAction func addExercisedButtonPressed(_ sender: UIButton) {
@@ -87,7 +88,7 @@ extension ExerciseCell: UITableViewDelegate, UITableViewDataSource{
             cell.weightTextField.delegate = self
             cell.weightTextField.tag = indexPath.row
             
-            cell.previousLabel.text = setInfo.previous
+            cell.previousLabel.text = setInfo.getPrevious()
             cell.repsTextField.placeholder = String(setInfo.reps)
             cell.weightTextField.placeholder = String(format: "%.2f", setInfo.weight)
             cell.SetNumberLabel.text = String(setInfo.order + 1)
@@ -119,7 +120,7 @@ extension ExerciseCell: SwipeTableViewCellDelegate{
             self.setsManager!.deleteSingleSet(at: indexPath.row)
             self.ecDelegate?.updateUI()
         }
-        deleteAction.image = UIImage(systemName: "trach")
+        // deleteAction.image = UIImage(systemName: "trash")  Image is too big
         return [deleteAction]
     }
     
