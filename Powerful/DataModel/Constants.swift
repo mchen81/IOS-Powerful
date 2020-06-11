@@ -27,6 +27,6 @@ struct K{
     
     struct ViewControllerIdentifier{
         static let EdtingExerciseView = "EdtingExerciseView"
-        
+        static let RestingView = "RestingView"
     }
 }

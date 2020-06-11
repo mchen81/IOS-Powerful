@@ -2,22 +2,25 @@ PODS:
   - ChameleonFramework/Default (2.1.0)
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
+  - CircleProgressView (1.2.0)
   - IQKeyboardManagerSwift (6.5.5)
-  - Realm (5.0.2):
-    - Realm/Headers (= 5.0.2)
-  - Realm/Headers (5.0.2)
-  - RealmSwift (5.0.2):
-    - Realm (= 5.0.2)
+  - Realm (5.0.3):
+    - Realm/Headers (= 5.0.3)
+  - Realm/Headers (5.0.3)
+  - RealmSwift (5.0.3):
+    - Realm (= 5.0.3)
   - SwipeCellKit (2.7.1)
 
 DEPENDENCIES:
   - ChameleonFramework/Swift (from `https://github.com/wowansm/Chameleon.git`, branch `swift5`)
+  - CircleProgressView
   - IQKeyboardManagerSwift
   - RealmSwift
   - SwipeCellKit
 
 SPEC REPOS:
   trunk:
+    - CircleProgressView
     - IQKeyboardManagerSwift
     - Realm
     - RealmSwift
@@ -35,11 +38,12 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
+  CircleProgressView: 6b5b091d59dc5e5d2fda84e637a40498cdc39937
   IQKeyboardManagerSwift: 0fb93310284665245591f50f7a5e38de615960b7
-  Realm: 6b6f096671b64b04d08974177cabb2ff9343d153
-  RealmSwift: a3db6be0488bf3e1d5314c2956cefe98a65cdd01
+  Realm: bfca1699b61b0b17c3a69ae0e648314eae91fbdb
+  RealmSwift: 493c9f089cd3893b3959007973c0e4f640906ba0
   SwipeCellKit: 3972254a826da74609926daf59b08d6c72e619ea
 
-PODFILE CHECKSUM: 00f1baf0fe290047ec5f53c9c983a2dd66648a70
+PODFILE CHECKSUM: 58c22e7b8e930c10666cedc705543c750541f096
 
 COCOAPODS: 1.9.2

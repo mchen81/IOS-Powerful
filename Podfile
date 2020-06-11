@@ -7,6 +7,7 @@ target 'Powerful' do
 
   # Pods for Powerful
   pod 'IQKeyboardManagerSwift'
+  pod 'CircleProgressView'
   pod 'SwipeCellKit'
   pod 'RealmSwift'
   pod 'ChameleonFramework/Swift', :git => 'https://github.com/wowansm/Chameleon.git', :branch => 'swift5'

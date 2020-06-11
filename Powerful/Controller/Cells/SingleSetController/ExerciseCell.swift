@@ -13,6 +13,7 @@ import RealmSwift
 protocol ExerciseCellDelegate {
     func updateUI()
     func popUpViewController(with subViewController: EditingExerciseController)
+    func resting(for seconds: Int)
 }
 
 
@@ -70,6 +71,7 @@ class ExerciseCell: UITableViewCell { // AKA sets controller
     
 }
 
+//MARK: - Table View Setting
 extension ExerciseCell: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -102,6 +104,11 @@ extension ExerciseCell: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let set = setsManager?.sets[indexPath.row] {
             setsManager!.setDone(at: indexPath.row, is: !set.isDone)
+            if let time = setsManager?.parentExercise?.restTime  {
+                if time > 0 && set.isDone {
+                    ecDelegate?.resting(for: time)
+                }
+            }
             
             tableView.reloadData()
             tableView.deselectRow(at: indexPath, animated: false)

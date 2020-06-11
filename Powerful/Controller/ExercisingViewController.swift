@@ -127,6 +127,18 @@ extension ExercisingViewController: ExerciseCellDelegate{
         subViewController.didMove(toParent: self)
     }
     
+    func resting(for seconds: Int) {
+        let restView = UIStoryboard(name: K.NibName.Main, bundle: nil)
+            .instantiateViewController(withIdentifier: K.ViewControllerIdentifier.RestingView) as! RestingViewController
+        
+        restView.totalTime = seconds
+        
+        self.addChild(restView)
+        restView.view.frame = self.view.frame
+        self.view.addSubview(restView.view)
+        restView.didMove(toParent: self)
+    }
+    
 }
 
 extension ExercisingViewController: EditingExerciseDelegate{
