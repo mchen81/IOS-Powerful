@@ -25,6 +25,8 @@
 		56A743BA249043830000467F /* SingleSetsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A743B9249043830000467F /* SingleSetsManager.swift */; };
 		56BF013D24914D27001FFB47 /* EditingExerciseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BF013B24914D27001FFB47 /* EditingExerciseController.swift */; };
 		56BF01452491FEA9001FFB47 /* RestingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BF01442491FEA9001FFB47 /* RestingViewController.swift */; };
+		56CFB2F72492C8E300F2117E /* WillBePopedUpViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CFB2F62492C8E300F2117E /* WillBePopedUpViewProtocol.swift */; };
+		56CFB2FA249315A100F2117E /* TimerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CFB2F9249315A100F2117E /* TimerHelper.swift */; };
 		CAB8536DC0C27D789F0D0874 /* Pods_Powerful.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73F3187CB2A93825DB9CFC42 /* Pods_Powerful.framework */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +52,8 @@
 		56A743B9249043830000467F /* SingleSetsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSetsManager.swift; sourceTree = "<group>"; };
 		56BF013B24914D27001FFB47 /* EditingExerciseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingExerciseController.swift; sourceTree = "<group>"; };
 		56BF01442491FEA9001FFB47 /* RestingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestingViewController.swift; sourceTree = "<group>"; };
+		56CFB2F62492C8E300F2117E /* WillBePopedUpViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WillBePopedUpViewProtocol.swift; sourceTree = "<group>"; };
+		56CFB2F9249315A100F2117E /* TimerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerHelper.swift; sourceTree = "<group>"; };
 		73F3187CB2A93825DB9CFC42 /* Pods_Powerful.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Powerful.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D573204585909DC95B260C9F /* Pods-Powerful.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Powerful.debug.xcconfig"; path = "Target Support Files/Pods-Powerful/Pods-Powerful.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -101,6 +105,7 @@
 				56A586482489AC9B005E0E5B /* Controller */,
 				56A586492489ACB7005E0E5B /* DataModel */,
 				56A586472489AC8B005E0E5B /* View */,
+				56CFB2F82493158900F2117E /* Helper */,
 				56A5863B2489AC3B005E0E5B /* Assets.xcassets */,
 				56A586402489AC3B005E0E5B /* Info.plist */,
 			);
@@ -128,11 +133,10 @@
 		56A586482489AC9B005E0E5B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				56BF01432491FE91001FFB47 /* RestingController */,
-				56A743B024903A180000467F /* Cells */,
-				56A5864C2489AF75005E0E5B /* ExercisingViewController.swift */,
 				56A5864E2489B2F4005E0E5B /* RoutineViewController.swift */,
-				56BF014024914D3E001FFB47 /* Edting Exercise */,
+				56A5864C2489AF75005E0E5B /* ExercisingViewController.swift */,
+				56CFB2F52492C70B00F2117E /* PopedUpView */,
+				56A743B024903A180000467F /* Cells */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -188,6 +192,24 @@
 				56BF01442491FEA9001FFB47 /* RestingViewController.swift */,
 			);
 			path = RestingController;
+			sourceTree = "<group>";
+		};
+		56CFB2F52492C70B00F2117E /* PopedUpView */ = {
+			isa = PBXGroup;
+			children = (
+				56BF01432491FE91001FFB47 /* RestingController */,
+				56BF014024914D3E001FFB47 /* Edting Exercise */,
+				56CFB2F62492C8E300F2117E /* WillBePopedUpViewProtocol.swift */,
+			);
+			path = PopedUpView;
+			sourceTree = "<group>";
+		};
+		56CFB2F82493158900F2117E /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				56CFB2F9249315A100F2117E /* TimerHelper.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		882FB39A88FC01EA0C885E38 /* Frameworks */ = {
@@ -329,6 +351,8 @@
 				56A586322489AC3A005E0E5B /* SceneDelegate.swift in Sources */,
 				5612D6AA248B2D3C008A9762 /* Models.swift in Sources */,
 				56A743BA249043830000467F /* SingleSetsManager.swift in Sources */,
+				56CFB2F72492C8E300F2117E /* WillBePopedUpViewProtocol.swift in Sources */,
+				56CFB2FA249315A100F2117E /* TimerHelper.swift in Sources */,
 				56A5864D2489AF75005E0E5B /* ExercisingViewController.swift in Sources */,
 				56A743B724903E370000467F /* ExerciseCell.swift in Sources */,
 				56BF01452491FEA9001FFB47 /* RestingViewController.swift in Sources */,

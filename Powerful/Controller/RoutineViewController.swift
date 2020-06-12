@@ -15,6 +15,9 @@ class RoutineViewController: UIViewController{
     @IBOutlet weak var routineTableView: UITableView!
     
     var routineManager: RoutineManager?
+    var isWorkingOut = false
+    var workingOutTimer = Timer()
+    var workingOutTimeInSecond = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +62,8 @@ class RoutineViewController: UIViewController{
                 let exerciseManager = ExercisingManager()
                 exerciseManager.parentRutine = selectedRoutine
                 destinationVC.exercisingManager = exerciseManager
+                destinationVC.workingTimerInSec = self.workingOutTimeInSecond
+                destinationVC.delegate = self
             }
         }
     }
@@ -78,7 +83,13 @@ extension RoutineViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if isWorkingOut == false {
+            isWorkingOut = true
+            workingOutTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+        }
         performSegue(withIdentifier: K.SeugueIdentifier.StartWorkingOut, sender: self)
+
     }
     
     func updateUI(reloadTV: Bool = true){
@@ -109,4 +120,23 @@ extension RoutineViewController: SwipeTableViewCellDelegate{
     }
 }
 
+//MARK: - Exercise Delegate
+extension RoutineViewController: ExercisingViewControllerDelegate{
+    func endExercise() {
+        isWorkingOut = false
+        workingOutTimer.invalidate()
+        workingOutTimeInSecond = 0
+    }
+}
 
+//MARK: - Timer
+extension RoutineViewController {
+    
+    @objc func updateTimer(){
+        workingOutTimeInSecond += 1
+        print(workingOutTimeInSecond)
+    }
+    
+    
+    
+}

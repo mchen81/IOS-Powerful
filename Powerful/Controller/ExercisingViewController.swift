@@ -10,6 +10,10 @@ import UIKit
 import SwipeCellKit
 import RealmSwift
 
+protocol ExercisingViewControllerDelegate {
+    func endExercise()
+}
+
 class ExercisingViewController: UIViewController {
     
     //MARK: - Outlet
@@ -20,6 +24,11 @@ class ExercisingViewController: UIViewController {
     var exercisingManager : ExercisingManager?
     var timer = Timer()
     var workingTimerInSec = 0
+    
+    var isFinishOrCancel = false
+    
+    var delegate: ExercisingViewControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,14 +40,22 @@ class ExercisingViewController: UIViewController {
 
         exerciseTitleLabel.text = exercisingManager?.parentRutine?.name
         
-        workingTimerLabel.text = "00:00"
+        isFinishOrCancel = false
+        workingTimerLabel.text = TimerHelper.secToTimeString(workingTimerInSec)
         timer = Timer.scheduledTimer(timeInterval: 1.0, target:self, selector: #selector(updateTimer), userInfo:nil, repeats: true)
+        
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
         
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         // print("view disappear")
         timer.invalidate()
+        if isFinishOrCancel {
+            delegate?.endExercise()
+        }
     }
     
     @IBAction func addExercisePressed(_ sender: UIButton) {
@@ -68,6 +85,8 @@ class ExercisingViewController: UIViewController {
     @IBAction func finishButtonPressed(_ sender: UIButton) {
         
         self.dismiss(animated: true) {
+            self.isFinishOrCancel = true
+            self.delegate?.endExercise()
             self.exercisingManager?.finishExercising()
         }
         
@@ -75,28 +94,15 @@ class ExercisingViewController: UIViewController {
     
     @IBAction func cancelButtonPressed(_ sender: UIButton) {
         self.dismiss(animated: true) {
+            self.isFinishOrCancel = true
+            self.delegate?.endExercise()
             self.exercisingManager?.finishExercising()
         }
     }
     
     @objc func updateTimer(){
         workingTimerInSec += 1
-        var hour = 0
-        var min = 0
-        var sec = 0
-        
-        if workingTimerInSec >= 60 {
-            min = Int(workingTimerInSec / 60)
-            if min >= 60 {
-                hour = Int(min / 60)
-                min = min % 60
-            }
-            sec = workingTimerInSec % 60
-        }else{
-            sec = workingTimerInSec
-        }
-        let timeString = hour == 0 ? String(format: "%02d:%02d", min, sec) : String(format: "$d:%02d:%02d", hour, min, sec)
-        workingTimerLabel.text =  timeString
+        workingTimerLabel.text =  TimerHelper.secToTimeString(workingTimerInSec)
     }
     
 }
@@ -145,34 +151,23 @@ extension ExercisingViewController: UITableViewDataSource, UITableViewDelegate{
     
 }
 
-
+//MARK: - Exercise Cell Delegare
 extension ExercisingViewController: ExerciseCellDelegate{
     
     func updateUI(){
         exercisingTableView.reloadData()
     }
     
-    func popUpViewController(with subViewController: EditingExerciseController) {
+    func popUpViewController(with subViewController: WillBePopedUpViewController) {
         self.addChild(subViewController)
         subViewController.view.frame = self.view.frame
         self.view.addSubview(subViewController.view)
         subViewController.didMove(toParent: self)
     }
     
-    func resting(for seconds: Int) {
-        let restView = UIStoryboard(name: K.NibName.Main, bundle: nil)
-            .instantiateViewController(withIdentifier: K.ViewControllerIdentifier.RestingView) as! RestingViewController
-        
-        restView.totalTime = seconds
-        
-        self.addChild(restView)
-        restView.view.frame = self.view.frame
-        self.view.addSubview(restView.view)
-        restView.didMove(toParent: self)
-    }
     
 }
-
+//MARK: - Edting Exercise actions
 extension ExercisingViewController: EditingExerciseDelegate{
     func delete(at index: Int) {
         print("Delete Target: \(index)")

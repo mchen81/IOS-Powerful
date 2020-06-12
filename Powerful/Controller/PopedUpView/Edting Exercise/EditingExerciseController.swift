@@ -54,7 +54,7 @@ class EditingExerciseController: UIViewController {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             if touch.view != settingView {
-                self.view.isHidden = true
+                self.leave()
             }
         }
     }
@@ -91,7 +91,7 @@ class EditingExerciseController: UIViewController {
             if let text = textField.text{
                 if(!text.isEmpty){
                     self.delegate?.rename(at: self.order, name: text)
-                    self.leaveSetting()
+                    self.leave()
                 }
             }
         }
@@ -116,7 +116,7 @@ class EditingExerciseController: UIViewController {
             if let text = textField.text{
                 if(!text.isEmpty){
                     self.delegate?.setTimer(at: self.order, seconds: Int(text) ?? 0)
-                    self.leaveSetting()
+                    self.leave()
                 }
             }
         }
@@ -133,12 +133,16 @@ class EditingExerciseController: UIViewController {
     @objc func deleteButtonPressed(_ sender: UIButton){
         print("delete got pressed")
         delegate?.delete(at: self.order)
-        leaveSetting()
+        leave()
     }
-    
-    
-    func leaveSetting(){
-        self.view.isHidden = true
+
+}
+
+
+extension EditingExerciseController: WillBePopedUpViewController{
+    func leave() {
+        self.view.removeFromSuperview()
+        self.removeFromParent()
     }
     
 }

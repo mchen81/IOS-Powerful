@@ -28,7 +28,7 @@ class RestingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         backGroundView.layer.cornerRadius = 10
-        restTimeLabel.text = getTimeText(second: totalTime)
+        restTimeLabel.text = TimerHelper.secToTimeString(totalTime)
         timer = Timer.scheduledTimer(timeInterval: updateUnit, target:self, selector: #selector(updateTimer), userInfo:nil, repeats: true)
     }
     
@@ -44,29 +44,16 @@ class RestingViewController: UIViewController {
         if miliSecond >= 1.0 {
             if secondsPassed < totalTime {
                 secondsPassed += 1
-                restTimeLabel.text = getTimeText(second: totalTime - secondsPassed)
+                restTimeLabel.text = TimerHelper.secToTimeString(totalTime - secondsPassed)
             }
             miliSecond = 0
         }
         miliSecond += updateUnit
     }
-    
-    
-    func getTimeText(second: Int) -> String{
-        if second > 60 {
-            let min = Int(second / 60)
-            let sec = second % 60
-            return String(format: "%d:%02d", min , sec)
-        }
         
-        return String(second)
-    }
-    
     
     @IBAction func skipRestButtonPressed(_ sender: UIButton) {
-        timer.invalidate()
-        // self.view.isHidden = true
-        self.view.removeFromSuperview()
+        leave()
     }
     
     @IBAction func restingTimeModifyButtonPressed(_ sender: UIButton) {
@@ -77,6 +64,15 @@ class RestingViewController: UIViewController {
                 totalTime += 10
             }
         }
+    }
+    
+}
+
+extension RestingViewController: WillBePopedUpViewController{
+    func leave() {
+        timer.invalidate()
+        self.view.removeFromSuperview()
+        self.removeFromParent()
     }
     
 }

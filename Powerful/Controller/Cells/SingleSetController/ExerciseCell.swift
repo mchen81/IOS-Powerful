@@ -12,8 +12,8 @@ import RealmSwift
 
 protocol ExerciseCellDelegate {
     func updateUI()
-    func popUpViewController(with subViewController: EditingExerciseController)
-    func resting(for seconds: Int)
+    func popUpViewController(with subViewController: WillBePopedUpViewController)
+    
 }
 
 
@@ -106,7 +106,13 @@ extension ExerciseCell: UITableViewDelegate, UITableViewDataSource{
             setsManager!.setDone(at: indexPath.row, is: !set.isDone)
             if let time = setsManager?.parentExercise?.restTime  {
                 if time > 0 && set.isDone {
-                    ecDelegate?.resting(for: time)
+                    // ecDelegate?.resting(for: time)
+                    let restView = UIStoryboard(name: K.NibName.Main, bundle: nil)
+                        .instantiateViewController(withIdentifier: K.ViewControllerIdentifier.RestingView) as! RestingViewController
+                    restView.totalTime = time
+                    ecDelegate?.popUpViewController(with: restView)
+                    
+                    
                 }
             }
             
